@@ -45,27 +45,67 @@ In this project I am creating CRUD (create, read, update, delete) api's in Node.
 
 To install this project locally clone this [**project repository**](https://github.com/kaylamuraoka/Employee_Management_System) to create a local copy on your computer and sync between the two locations. You may then modify the code to your liking. For steps on how to clone a repository using the command line, read this section of the GitHub Docs [**about cloning a repository**](https://docs.github.com/en/free-pro-team@latest/github/creating-cloning-and-archiving-repositories/cloning-a-repository#about-cloning-a-repository).
 
-You should run the following commands in the project folder:
+You should run the following commands in the project folder.
+Step 1: Initialise and configure the project with the command
 
 ```
-// Initialise and Configure the Project with the command
 npm init -y
+```
 
-// Now install the folling dependencies:
-// Express
-npm install express --save
+Once you see a package.json file you can proceed to the next step.
 
-// Body Parser
-npm install body-parser --save
+Step 2: Install the following dependencies
 
-// MySQL
-npm install mysql --save
+1. Express - web framework for building the Rest API's
+2. Body Parser - for parsing requests; converting the POST data into the request body
+3. MySQL - Node.js driver for MySQL
 
-// Nodemon
+```
+npm install express mysql body-parser --save
+```
+
+4. Nodemon
+
+```
 npm install --save-dev nodemon
 ```
 
-You should now have a package.json file in your directory.
+You should now have a package.json file in your directory, and it should look like this:
+
+```
+"name": "node-mqsql-crud-app",
+  "version": "1.0.0",
+  "description": "This is a app for creating a crud api using node, express, and mysql",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaylamuraoka/Employee_Management_System.git"
+  },
+  "keywords": [
+    "nodejs",
+    "expressjs",
+    "mysql",
+    "api",
+    "restfulapi",
+    "javascript",
+    "es6"
+  ],
+  "author": "Kayla Muraoka",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kaylamuraoka/Employee_Management_System/issues"
+  },
+  "homepage": "https://github.com/kaylamuraoka/Employee_Management_System#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
+  }
+}
+```
 
 ## Usage
 
