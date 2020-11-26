@@ -22,6 +22,9 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to fainc application." });
 });
 
+// include routes in server.js
+require("./app/routes/school.routes.js");
+
 // set port to 3000, listen for incomming requests
 app.listen(3000, () => {
   console.log("Server is running on port 3000.");
