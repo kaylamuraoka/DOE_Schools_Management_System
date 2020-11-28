@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
 });
 
 // include routes in server.js
-require("./app/routes/school.routes.js");
+require("./app/routes/school.routes.js")(app);
 
 // set port to 3000, listen for incomming requests
 app.listen(3000, () => {
