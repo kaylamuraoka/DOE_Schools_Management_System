@@ -33,9 +33,9 @@ app.get("/", (req, res) => {
 });
 
 // include routes in server.js
-require("./app/routes/school.routes.js")(app);
+require("./app/routes/school.routes")(app);
 
-// listen on port 8080 for incoming requests.
+// listen on port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);

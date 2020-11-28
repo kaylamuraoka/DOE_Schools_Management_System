@@ -25,6 +25,9 @@ module.exports = (sequelize, Sequelize) => {
     complex: {
       type: Sequelize.STRING,
     },
+    active_project: {
+      type: Sequelize.BOOLEAN,
+    },
     last_renovated: {
       type: Sequelize.STRING,
     },

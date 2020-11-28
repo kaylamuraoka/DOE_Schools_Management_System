@@ -3,21 +3,28 @@
 module.exports = (app) => {
   const schools = require("../controllers/school.controller.js");
 
-  // Create a new School
-  app.post("/schools", schools.create);
-
-  // Retrieve all School
-  app.get("/schools", schools.findAll);
-
-  // Retrieve a single School with schoolId
-  app.get("/schools/:schoolId", schools.findOne);
-
-  // Update a School with schoolId
-  app.put("/schools/:schoolId", schools.update);
-
-  // Delete a School with schoolId
-  app.delete("/schools/:schoolId", schools.delete);
+  var router = require("express").Router();
 
   // Create a new School
-  app.delete("/schools", schools.deleteAll);
+  router.post("/", schools.create);
+
+  // Retrieve all Schools
+  router.get("/", schools.findAll);
+
+  // Retrieve all schools with active projects
+  router.get("/active", schools.findAllActiveProjects);
+
+  // Retrieve a single School with id
+  router.get("/:id", schools.findOne);
+
+  // Update a single School with id
+  router.get("/:id", schools.update);
+
+  // Delete a School with id
+  router.delete("/:id", schools.delete);
+
+  // Delete all Schools
+  router.delete("/:id", schools.deleteAll);
+
+  app.use("/api/schools", router);
 };

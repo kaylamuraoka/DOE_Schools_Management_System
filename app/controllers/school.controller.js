@@ -19,6 +19,7 @@ exports.create = (req, res) => {
     district: req.body.district,
     complex_area: req.body.complex_area,
     complex: req.body.complex_area,
+    active_project: req.body.active_project,
     last_renovated: req.body.last_renovated,
   };
 
@@ -50,72 +51,97 @@ exports.findAll = (req, res) => {
     });
 };
 
-// Find a single School with a schoolId
+// Find a single School with an id
 exports.findOne = (req, res) => {
-  School.findById(req.params.customerId, (err, data) => {
-    if (err) {
-      if (err.kind === "not_found") {
-        res.status(404).send({
-          message: `Not found School with id ${req.params.customerId}.`,
-        });
-      } else {
-        res.status(500).send({
-          message: "Error retrieving School with id " + req.params.schoolId,
-        });
-      }
-    } else res.send(data);
-  });
-};
+  const id = req.params.id;
 
-// Update a School identified by the schoolId in the request
-exports.update = (req, res) => {
-  // Validate Request
-  if (!req.body) {
-    res.status(400).send({
-      message: "Content can not be empty!",
+  School.findByPk(id)
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: `Error retrieving School with id: ${id}.`,
+      });
     });
-  }
-
-  School.updateById(req.params.schoolId, new School(req.body), (err, data) => {
-    if (err) {
-      if (err.kind === "not_found") {
-        res.status(404).send({
-          message: `Not found School with id ${req.params.schoolId}.`,
-        });
-      } else {
-        res.status(500).send({
-          message: "Error updating School with id " + req.params.schoolId,
-        });
-      }
-    } else res.send(data);
-  });
 };
 
-// Delete a School with the specified schoolId in the request
-exports.delete = (req, res) => {
-  School.remove(req.params.schoolId, (err, data) => {
-    if (err) {
-      if (err.kind === "not_found") {
-        res.status(404).send({
-          message: `Not found School with id ${req.params.schoolId}.`,
+// Update a School identified by the id in the request
+exports.update = (req, res) => {
+  const id = req.params.id;
+
+  School.update(req.body, {
+    where: { id: id },
+  })
+    .then((num) => {
+      if (num == 1) {
+        res.send({
+          message: "School was updated successfully.",
         });
       } else {
-        res.status(500).send({
-          message: "Could not delete School with id " + req.params.schoolId,
+        res.send({
+          message: `Cannot update School with id: ${id}. Maybe School was not found or req.body is empty!`,
         });
       }
-    } else res.send({ message: `School was deleted successfully!` });
-  });
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: `Error updating Tutorial with id: ${id}.`,
+      });
+    });
+};
+
+// Delete a School with the specified id in the request
+exports.delete = (req, res) => {
+  const id = req.params.id;
+
+  School.destroy({
+    where: { id: id },
+  })
+    .then((num) => {
+      if (num == 1) {
+        res.send({
+          message: "School was deleted successfully.",
+        });
+      } else {
+        res.send({
+          message: `Cannot delete School with id: ${id}. Maybe School was not found!`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: `Could not delete School with id: ${id}.`,
+      });
+    });
 };
 
 // Delete all Schools from the database.
 exports.deleteAll = (req, res) => {
-  School.removeAll((err, data) => {
-    if (err)
+  School.destroy({
+    where: {},
+    truncate: flase,
+  })
+    .then((nums) => {
+      res.send({ message: `${nums} Schools were deleted successfully.` });
+    })
+    .catch((err) => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while removing all schools.",
+          err.message || "Some error occured while removing all schools.",
       });
-    else res.send({ message: `All Schools were deleted successfully!` });
-  });
+    });
+};
+
+// Find all Schools with Active Repairs/Construction (active_project = true)
+exports.findAllActiveProjects = (req, res) => {
+  School.findAll({ where: { active_project: true } })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Some error occurred while retrieving schools.",
+      });
+    });
 };
