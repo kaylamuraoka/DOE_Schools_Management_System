@@ -1,0 +1,39 @@
+{
+  "name": "node-mqsql-crud-app",
+  "version": "1.0.0",
+  "description": "This is a app for creating a crud api using node, express, and mysql",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaylamuraoka/Employee_Management_System.git"
+  },
+  "keywords": [
+    "nodejs",
+    "expressjs",
+    "mysql",
+    "api",
+    "restfulapi",
+    "javascript",
+    "es6"
+  ],
+  "author": "Kayla Muraoka",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kaylamuraoka/Employee_Management_System/issues"
+  },
+  "homepage": "https://github.com/kaylamuraoka/Employee_Management_System#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.3.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}

@@ -29,7 +29,9 @@ In this project I am creating CRUD (create, read, update, delete) api's in Node.
 
 ## Installation
 
-#### Prerequisites and required applications
+### Prerequisites and required applications
+
+#### For the Back-end (building APIs and writing server code):
 
 1. [**Node.js**](https://nodejs.org/en/) is an implementation of the V8 JavaScript engine without Chrome that allows you to write server-side code using JavaScript. Therefore, you no longer neeed a browser to run JavaScript. You will need to have Node.js installed on your computer; you can follow the [**Node.js installation guide on The Full-Stack Blog**](https://coding-boot-camp.github.io/full-stack/nodejs/how-to-install-nodejs) to install Node.js on your computer.
 
@@ -66,7 +68,7 @@ Step 2: Install the following dependencies
 npm install express mysql2 body-parser cors sequelize --save
 ```
 
-4. Nodemon
+4. Nodemon - tracks every file change and restarts the backend server for you
 
 ```
 npm install --save-dev nodemon
@@ -103,10 +105,42 @@ You should now have a package.json file in your directory, and it should look li
   "homepage": "https://github.com/kaylamuraoka/Employee_Management_System#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.3.5"
   }
 }
+```
+
+#### For the Front-end (building the user interface (UI):
+
+We use the following technologies:
+
+1. React 16
+2. react-router-dom 5.1.2
+3. axios 0.19.2
+4. bootstrap 4.5
+
+The package.json file should contain the 4 following modules: react, react-router-dom, axios & bootstrap.
+
+In the front_end folder run command to setup our React.js project:
+
+```
+npx create-react-app react-crud
+```
+
+To import Bootstrap run:
+
+```
+npm install bootstrap
+```
+
+Add a React Router
+
+```
+npm install react-router-dom
 ```
 
 ## Usage
