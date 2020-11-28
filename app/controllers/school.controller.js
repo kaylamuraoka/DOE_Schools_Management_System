@@ -1,43 +1,53 @@
-const School = require("./../models/school.model.js");
+const db = require("./../models");
+const School = db.schools;
+const Op = db.Sequelize.Op;
 
 // Create and Save a new School
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body) {
+  if (!req.body.name) {
     res.status(400).send({
       message: "Content can not be empty!",
     });
+    return;
   }
 
   // Create a School
-  const school = new School({
+  const school = {
     name: req.body.name,
     address: req.body.address,
     district: req.body.district,
     complex_area: req.body.complex_area,
     complex: req.body.complex_area,
     last_renovated: req.body.last_renovated,
-  });
+  };
 
   // Save School in the database
-  School.create(school, (err, data) => {
-    if (err)
+  School.create(school)
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
       res.status(500).send({
         message: err.message || "Some error occurred while adding the School.",
       });
-    else res.send(data);
-  });
+    });
 };
 
-// Retrieve all Schools from the database.
+// Retrieve all Schools from the database - find by name from the database.
 exports.findAll = (req, res) => {
-  School.getAll((err, data) => {
-    if (err)
+  const name = req.query.name;
+  var condition = name ? { name: { [Op.like]: `%${name}%` } } : null;
+
+  School.findAll({ where: condition })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
       res.status(500).send({
         message: err.message || "Some error occurred while retrieving schools.",
       });
-    else res.send(data);
-  });
+    });
 };
 
 // Find a single School with a schoolId

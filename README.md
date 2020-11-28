@@ -58,11 +58,12 @@ Step 2: Install the following dependencies
 
 1. Express - web framework for building the Rest API's
 2. Body Parser - for parsing requests; converting the POST data into the request body
-3. MySQL - Node.js driver for MySQL
+3. MySQL2 - Node.js driver for MySQL
 4. Cors - provides Express middleware to enable CORS with various options
+5. Sequelize - so we don’t need to write CRUD functions, Sequelize supports them
 
 ```
-npm install express mysql body-parser cors --save
+npm install express mysql2 body-parser cors sequelize --save
 ```
 
 4. Nodemon
