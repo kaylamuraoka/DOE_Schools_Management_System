@@ -168,19 +168,6 @@ export default class addSchool extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="complex_area">District</label>
-              <input
-                type="text"
-                className="form-control"
-                id="district"
-                required
-                value={this.state.district}
-                onChange={this.onChangeDistrict}
-                name="district"
-              ></input>
-            </div>
-
-            <div className="form-group">
               <label htmlFor="complex_area">Complex Area</label>
               <input
                 type="text"
@@ -190,19 +177,6 @@ export default class addSchool extends Component {
                 value={this.state.complex_area}
                 onChange={this.onChangeComplexArea}
                 name="complex_area"
-              ></input>
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="complex">Complex</label>
-              <input
-                type="text"
-                className="form-control"
-                id="complex"
-                required
-                value={this.state.complex}
-                onChange={this.onChangeComplex}
-                name="complex"
               ></input>
             </div>
 
