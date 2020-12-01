@@ -1,5 +1,11 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Link, Switch, Route } from "react-router-dom";
+
+// import components
+import SchoolsList from "./components/schools-list.component";
+import AddSchool from "./components/add-school.component";
+import School from "./components/school.component";
 
 class App extends Component {
   render() {
