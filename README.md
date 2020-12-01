@@ -1,4 +1,4 @@
-# Employee_Management_System
+# Department of Education Schools Management System
 
 ## Problem
 
