@@ -128,9 +128,12 @@ The package.json file should contain the 4 following modules: react, react-route
 In the front_end folder run command to setup our React.js project:
 
 ```
-npx create-react-app react-crud
+npx create-react-app client
+cd client
+npm start
 ```
 
+To make sure the react app is working cd(change directory) into the client directory and using your browser, navigate to http://localhost:3000/. If you see the the react welcome page it means you now have a basic React application running on your local machine.
 To import Bootstrap run:
 
 ```
