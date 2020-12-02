@@ -20,7 +20,7 @@ export default class addSchool extends Component {
       district: "",
       complex_area: "",
       complex: "",
-      active_project: "",
+      active_project: false,
       last_renovated: "",
       submitted: false,
     };
@@ -57,12 +57,6 @@ export default class addSchool extends Component {
     });
   }
 
-  onChangeActiveProject(e) {
-    this.setState({
-      active_project: e.target.value,
-    });
-  }
-
   onChangeLastRenovated(e) {
     this.setState({
       last_renovated: e.target.value,
@@ -77,7 +71,6 @@ export default class addSchool extends Component {
       district: this.state.district,
       complex_area: this.state.complex_area,
       complex: this.state.complex,
-      active_project: this.state.active_project,
       last_renovated: this.state.last_renovated,
     };
 
@@ -93,6 +86,7 @@ export default class addSchool extends Component {
           complex: response.data.complex,
           active_project: response.data.active_project,
           last_renovated: response.data.last_renovated,
+
           submitted: true,
         });
         console.log(response.data);
@@ -110,12 +104,13 @@ export default class addSchool extends Component {
       district: "",
       complex_area: "",
       complex: "",
-      active_project: "",
+      active_project: false,
       last_renovated: "",
 
       submitted: false,
     });
   }
+
   // render method checks the submitted state, and if "submitted: true", show Add button to create a new school again. Otherwise, a Form will display
   render() {
     return (
@@ -124,7 +119,7 @@ export default class addSchool extends Component {
           <div>
             <h4>You submitted successfully!</h4>
             <button className="btn btn-success" onClick={this.newSchool}>
-              Add
+              Add another school
             </button>
           </div>
         ) : (
@@ -195,25 +190,11 @@ export default class addSchool extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="active_project">Active Project</label>
-              <input
-                type="text"
-                className="form-control"
-                id="active_project"
-                required
-                value={this.state.active_project}
-                onChange={this.onChangeActiveProject}
-                name="active_project"
-              ></input>
-            </div>
-
-            <div className="form-group">
               <label htmlFor="last_renovated">Last Renovated</label>
               <input
                 type="date"
                 className="form-control"
                 id="last_renovated"
-                required
                 value={this.state.last_renovated}
                 onChange={this.onChangeLastRenovated}
                 name="last_renovated"

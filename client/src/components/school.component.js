@@ -11,9 +11,9 @@ export default class School extends Component {
     this.onChangeDistrict = this.onChangeDistrict.bind(this);
     this.onChangeComplexArea = this.onChangeComplexArea.bind(this);
     this.onChangeComplex = this.onChangeComplex.bind(this);
-    this.onChangeActiveProject = this.onChangeActiveProject.bind(this);
     this.onChangeLastRenovated = this.onChangeLastRenovated.bind(this);
     this.getSchool = this.getSchool.bind(this);
+    this.updateStatus = this.updateStatus.bind(this);
     this.updateSchool = this.updateSchool.bind(this);
     this.deleteSchool = this.deleteSchool.bind(this);
 
@@ -25,7 +25,7 @@ export default class School extends Component {
         district: "",
         complex_area: "",
         complex: "",
-        active_project: "",
+        active_project: false,
         last_renovated: "",
       },
       message: "",
@@ -93,17 +93,6 @@ export default class School extends Component {
     }));
   }
 
-  onChangeActiveProject(e) {
-    const status = e.target.value;
-
-    this.setState((prevState) => ({
-      currentSchool: {
-        ...prevState.currentSchool,
-        active_project: status,
-      },
-    }));
-  }
-
   onChangeLastRenovated(e) {
     const last_renovated = e.target.value;
 
@@ -116,11 +105,38 @@ export default class School extends Component {
   }
 
   getSchool(id) {
-    SchoolDataService.getAll(id)
+    SchoolDataService.get(id)
       .then((response) => {
         this.setState({
           currentSchool: response.data,
         });
+        console.log(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+
+  updateStatus(status) {
+    var data = {
+      id: this.state.currentSchool.id,
+      name: this.state.currentSchool.name,
+      address: this.state.currentSchool.address,
+      district: this.state.currentSchool.district,
+      complex_area: this.state.currentSchool.complex_area,
+      complex: this.state.currentSchool.complex,
+      active_project: status,
+      last_renovated: this.state.currentSchool.last_renovated,
+    };
+
+    SchoolDataService.update(this.state.currentSchool.id, data)
+      .then((response) => {
+        this.setState((prevState) => ({
+          currentSchool: {
+            ...prevState.currentSchool,
+            active_project: status,
+          },
+        }));
         console.log(response.data);
       })
       .catch((e) => {
@@ -219,17 +235,6 @@ export default class School extends Component {
               </div>
 
               <div className="form-group">
-                <label htmlFor="active_project">Active Project</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="active_project"
-                  value={currentSchool.active_project}
-                  onChange={this.onChangeActiveProject}
-                ></input>
-              </div>
-
-              <div className="form-group">
                 <label htmlFor="last_renovated">Last Renovated</label>
                 <input
                   type="date"
@@ -241,12 +246,29 @@ export default class School extends Component {
               </div>
             </form>
 
+            {currentSchool.active_project ? (
+              <button
+                className="badge badge-primary mr-2"
+                onClick={() => this.updateStatus(false)}
+              >
+                Change to Inactive
+              </button>
+            ) : (
+              <button
+                className="badge badge-primary mr-2"
+                onClick={() => this.updateStatus(true)}
+              >
+                Activate
+              </button>
+            )}
+
             <button
               className="badge badge-danger mr-2"
               onClick={this.deleteSchool}
             >
               Delete
             </button>
+
             <button
               type="submit"
               className="badge badge-success"

@@ -112,6 +112,7 @@ export default class SchoolsList extends Component {
         </div>
         <div className="col-md-6">
           <h4>Schools List</h4>
+
           <ul className="list-group">
             {schools &&
               schools.map((school, index) => (
@@ -172,15 +173,17 @@ export default class SchoolsList extends Component {
               </div>
               <div>
                 <label>
-                  <strong>Status:</strong>
-                </label>{" "}
-                {currentSchool.active_project ? "Active" : "Not Active"}
-              </div>
-              <div>
-                <label>
                   <strong>Last Renovated:</strong>
                 </label>{" "}
                 {currentSchool.last_renovated}
+              </div>
+              <div>
+                <label>
+                  <strong>Status:</strong>
+                </label>{" "}
+                {currentSchool.active_project
+                  ? "Active Renovations"
+                  : "Not Active Project"}
               </div>
 
               <Link
